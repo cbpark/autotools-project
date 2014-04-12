@@ -41,7 +41,7 @@ writeFiles pkg@Package{ .. } = do
   -- Write Makefile.am in the src directory
   putStrLn "Generating src/Makefile.am..."
   createFile ("src" </> "Makefile.am") $ unlines
-                               [ "AM_CFLAGS = -Wall"
+                               [ "AM_CFLAGS = -g -Wall -O2"
                                , ""
                                , "bin_PROGRAMS = hello"
                                , ""
@@ -123,9 +123,10 @@ configAC Package { .. } = do
                , ""
                , "# Checks for programs."
                , "AM_INIT_AUTOMAKE([-Wall -Werror foreign])"
-               , "AC_PROG_CC"
+               , "AC_PROG_CC_C99"
                , "AC_PROG_CXX"
                , "AM_PROG_AR"
+               , "LT_INIT"
                , ""
                , "# Checks for libraries."
                , ""
