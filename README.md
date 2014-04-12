@@ -3,11 +3,11 @@ autotools-project
 
 Interactively creating a skeleton for a C/C++ project using Autotools (GNU build system) like `cabal init` for Haskell projects.
 
-** Prerequisites
+## Prerequisites
 
 `autoconf`, `automake`, and `libtool` must be installed before using in your system.
 
-** Installation and Usage
+## Installation and Usage
 
 ```shell
 cabal configure
