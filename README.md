@@ -19,6 +19,7 @@ autotools-project
 make
 ./src/hello
 make clean
+make dist
 ```
 
 You may have to modify `configure.ac` and `src/Makefile.am` in the new project.
