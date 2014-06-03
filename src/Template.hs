@@ -41,7 +41,7 @@ writeFiles pkg@Package{ .. } = do
   -- Write Makefile.am in the src directory
   putStrLn "Generating src/Makefile.am..."
   createFile ("src" </> "Makefile.am") $ unlines
-                               [ "AM_CFLAGS = -g -Wall -O2"
+                               [ "AM_CFLAGS = -Wall"
                                , ""
                                , "bin_PROGRAMS = hello"
                                , ""

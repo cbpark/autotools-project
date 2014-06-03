@@ -1,21 +1,23 @@
 module PackageInfo (packageInfo) where
 
-import           Types               (License (..), Package (..))
+import           Types                     (License (..), Package (..))
 
-import           Control.Applicative ((<$>), (<*>))
-import           Data.Char           (isDigit)
-import           System.Directory    (getCurrentDirectory)
-import           System.FilePath     (takeBaseName)
-import           System.IO           (hFlush, stdout)
+import           Control.Applicative       ((<$>), (<*>))
+import           Control.Monad.IO.Class    (MonadIO (..))
+import           Control.Monad.Trans.Maybe (MaybeT (..))
+import           Data.Char                 (isDigit)
+import           System.Directory          (getCurrentDirectory)
+import           System.FilePath           (takeBaseName)
+import           System.IO                 (hFlush, stdout)
 
 packageInfo :: IO Package
 packageInfo = do
   pkgName'     <- getPackageName
   version'     <- getVersion
   license'     <- getLicense
-  authorName'  <- getAuthorName
-  email'       <- getEmail
-  description' <- getDescription
+  authorName'  <- runMaybeT getAuthorName
+  email'       <- runMaybeT getEmail
+  description' <- runMaybeT getDescription
   return Package { pkgName     = pkgName'
                  , version     = version'
                  , license     = license'
@@ -62,14 +64,18 @@ getLicense = do
                       _      -> do putStrLn $ str ++ " is not valid."
                                    getLicense' dl
 
-getAuthorName :: IO (Maybe String)
-getAuthorName = putStr "Author name? " >> userInput Nothing
+getAuthorName :: MaybeT IO String
+getAuthorName = getInfoSimple "Author name? "
 
-getEmail :: IO (Maybe String)
-getEmail = putStr "Maintainer email? " >> userInput Nothing
+getEmail :: MaybeT IO String
+getEmail = getInfoSimple "Maintainer email? "
 
-getDescription :: IO (Maybe String)
-getDescription = putStr "Project description? " >> userInput Nothing
+getDescription :: MaybeT IO String
+getDescription = getInfoSimple "Project description? "
+
+getInfoSimple :: String -> MaybeT IO String
+getInfoSimple question = do liftIO $ putStr question
+                            (MaybeT . userInput) Nothing
 
 userInput :: Maybe String -> IO (Maybe String)
 userInput guess = do
