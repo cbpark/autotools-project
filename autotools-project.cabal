@@ -1,6 +1,7 @@
 name:                autotools-project
 version:             0.1.0.0
 synopsis:            Interactively creating a skeleton for Autotools project
+homepage:            https://github.com/cbpark/autotools-project
 -- description:
 license:             BSD3
 license-file:        LICENSE
@@ -13,6 +14,10 @@ cabal-version:       >=1.10
 
 executable autotools-project
   main-is:             Main.hs
+  other-modules:       License
+                       PackageInfo
+                       Template
+                       Types
   build-depends:       base >=4.6,
                        directory >=1.2,
                        filepath >=1.3,
