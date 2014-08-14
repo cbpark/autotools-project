@@ -4,8 +4,7 @@ import           PackageInfo    (packageInfo)
 import           Template       (createTemplate)
 
 import           System.Exit    (ExitCode (..))
-import           System.Process (StdStream (..), createProcess, proc, std_err,
-                                 std_out, waitForProcess)
+import           System.Process
 
 checkProgram :: FilePath -> IO ()
 checkProgram program = do

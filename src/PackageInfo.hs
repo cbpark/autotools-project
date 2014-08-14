@@ -34,7 +34,7 @@ getPackageName = do
   input <- userInput (Just guess)
   case input of
     Just name -> return name
-    _         -> error $ show input ++ "is not valid."
+    _         -> error $ show input ++ " is not valid."
 
 getVersion :: IO String
 getVersion = do
@@ -43,7 +43,7 @@ getVersion = do
   input <- userInput (Just guess)
   case input of
     Just ver -> return ver
-    _        -> error $ show input ++ "is not valid."
+    _        -> error $ show input ++ " is not valid."
 
 getLicense :: IO License
 getLicense = do

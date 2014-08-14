@@ -11,8 +11,7 @@ import           System.Directory (Permissions (..), createDirectory,
 import           System.Exit      (ExitCode (..))
 import           System.FilePath  ((</>))
 import           System.IO        (IOMode (..), hGetLine, hPutStr, withFile)
-import           System.Process   (StdStream (..), createProcess, proc, std_out,
-                                   waitForProcess)
+import           System.Process
 
 createTemplate :: Package -> IO ()
 createTemplate pkg = do
@@ -26,7 +25,7 @@ createTemplate pkg = do
 
 prepareDirectories :: IO ()
 prepareDirectories = do
-  putStrLn "Creating diectories..."
+  putStrLn "Creating directories..."
   mapM_ createDirectory ["config", "m4", "src"]
 
 writeFiles :: Package -> IO ()
@@ -86,7 +85,7 @@ writeFiles pkg@Package{ .. } = do
 
   -- Write .gitignore
   putStrLn "Generating .gitignore..."
-  createFile ".gitgnore" $ unlines
+  createFile ".gitignore" $ unlines
                  [ "*.o", "*.lo", "*.a", "*.la", "*/.deps", "*/.libs"
                  , "*.gz", "*.orig", "*~", "autom4te.cache", "config.log"
                  , "config.status", "config/config.h", "config/stamp-h1"
