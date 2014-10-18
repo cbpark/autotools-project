@@ -87,9 +87,9 @@ writeFiles pkg@Package{ .. } = do
   putStrLn "Generating .gitignore..."
   createFile ".gitignore" $ unlines
                  [ "*.o", "*.lo", "*.a", "*.la", "*/.deps", "*/.libs"
-                 , "*.gz", "*.orig", "*~", "autom4te.cache", "config.log"
-                 , "config.status", "config/config.h", "config/stamp-h1"
-                 , "libtool", "Makefile"
+                 , "*.gz", "*.orig", "*~", ".#*", ".swp", "autom4te.cache"
+                 , "config.log", "config.status", "config/config.h"
+                 , "config/stamp-h1", "libtool", "Makefile"
                  ]
 
   -- Write autogen.sh
